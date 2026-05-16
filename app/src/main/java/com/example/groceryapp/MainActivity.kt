@@ -11,6 +11,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavController
+import com.example.groceryapp.navigation.NavGraph
+import com.example.groceryapp.preview_splash_screens.screens.FirstSplashScreen
 import com.example.groceryapp.ui.theme.GroceryAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -22,7 +25,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             GroceryAppTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) {
-
+                    NavGraph()
                 }
             }
         }
