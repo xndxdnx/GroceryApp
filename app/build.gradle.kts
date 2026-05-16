@@ -2,10 +2,13 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
-    //DaggerHilt
-    id("com.google.dagger.hilt.android")
-    id("kotlin-kapt")
 
+    // DaggerHilt
+    alias(libs.plugins.hilt)
+    alias(libs.plugins.ksp)
+
+    // Serialization
+    alias(libs.plugins.kotlin.serialization)
 }
 
 android {
@@ -46,11 +49,18 @@ android {
 }
 
 dependencies {
-    //DaggerHilt
-    implementation("com.google.dagger:hilt-android:2.55")
-    kapt("com.google.dagger:hilt-android-compiler:2.55")
-    implementation("androidx.hilt:hilt-navigation-compose:1.1.0")
-    implementation(libs.androidx.compose.remote.creation.core)
+    // Dagger Hilt
+    implementation(libs.hilt.android)
+    implementation(libs.hilt.navigation.compose)
+    ksp(libs.hilt.compiler)
+
+    // Serialization
+        // Навигация
+    implementation(libs.androidx.navigation.compose) // Берется из [libraries] -> androidx-navigation-compose
+        // Библиотека для поддержки @Serializable (без неё код не скомпилируется!)
+    implementation(libs.kotlinx.serialization.json)
+
+
 
     implementation(libs.androidx.material3)
     implementation(libs.androidx.core.ktx)

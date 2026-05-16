@@ -9,7 +9,18 @@ lifecycleRuntimeKtx = "2.10.0"
 activityCompose = "1.13.0"
 composeBom = "2024.09.00"
 material3 = "1.4.0"
-remoteCreationCore = "1.0.0-alpha07"
+
+# DaggerHilt
+hilt = "2.55"    # <-- Вот эта версия DaggerHilt
+hiltNavigation = "1.1.0" # <-- Зависимость для DaggerHilt
+ksp = "2.0.21-1.0.25" # <-- Версия KSP должна соответствовать версии Kotlin
+
+#Serialization
+# Библиотека навигации
+navigationCompose = "2.8.5" # Подходящая версия
+# Плагин сериализации (использует основную версию kotlin)
+kotlinSerialization = "2.0.21" # Проверьте, чтобы это имя СТРОГО совпадало с тем, что ниже
+kotlinxSerializationJson = "1.7.3" # Сама библиотека сериализации
 
 
 [libraries]
@@ -29,11 +40,29 @@ androidx-compose-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-te
 androidx-compose-material3 = { group = "androidx.compose.material3", name = "material3" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3", version.ref = "material3" }
 
-androidx-compose-remote-creation-core = { group = "androidx.compose.remote", name = "remote-creation-core", version.ref = "remoteCreationCore" }
+# DaggerHilt
+hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
+hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hilt" }
+hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hiltNavigation" }
+
+#Serialization
+    # Библиотека навигации
+androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigationCompose" }
+    # Библиотека для работы с аннотацией @Serializable
+kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
+
 
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+
+# DaggerHilt
+hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+
+#Serialization
+    # Плагин сериализации
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlinSerialization" }
 
