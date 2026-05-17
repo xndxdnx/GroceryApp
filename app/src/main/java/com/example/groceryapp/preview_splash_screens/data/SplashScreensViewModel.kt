@@ -53,7 +53,7 @@ class SplashScreensViewModel @Inject constructor(
     val thirdScreenImages = listOf(
         R.drawable.online_groceries_cuate,
         R.drawable.delivery_cuate,
-        R.drawable.delivery_cuate,
+        R.drawable.passionate_cuate,
     )
     val thirdScreenTitle = listOf(
         "Buy Grocery",
