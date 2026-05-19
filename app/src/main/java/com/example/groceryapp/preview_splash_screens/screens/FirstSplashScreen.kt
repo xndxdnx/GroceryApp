@@ -1,6 +1,7 @@
 package com.example.groceryapp.preview_splash_screens.screens
 
 import android.content.Context
+import android.util.Log
 import android.widget.Toast
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.tween
@@ -56,6 +57,8 @@ import com.example.groceryapp.ui.theme.borderColor
 import com.example.groceryapp.ui.theme.greyColor
 import com.example.groceryapp.ui.theme.primaryDarkColor
 import com.example.groceryapp.ui.theme.whiteColor
+import com.google.firebase.Firebase
+import com.google.firebase.firestore.firestore
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.jetbrains.annotations.Async
@@ -85,13 +88,11 @@ fun FirstSplashScreen(
         }
     }
 
-
-
     Box(
         modifier = Modifier
             .fillMaxSize()
     ) {
-        HorizontalPager(state = pageState) { page ->
+        HorizontalPager (state = pageState) { page ->
             Box(
                 modifier = Modifier
                     .fillMaxSize()
@@ -215,7 +216,7 @@ fun FirstSplashScreen(
                     ),
                     elevation = ButtonDefaults.buttonElevation(5.dp),
                     modifier = Modifier
-                        .size(height = 60.dp, width = 380.dp),
+                        .size(height = 60.dp, width = 200.dp),
                     shape = RoundedCornerShape(5.dp)
 
                 ) {
