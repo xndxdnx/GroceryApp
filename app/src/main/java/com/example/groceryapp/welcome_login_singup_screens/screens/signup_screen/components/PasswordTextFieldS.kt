@@ -36,7 +36,7 @@ import com.example.groceryapp.ui.theme.primaryDarkColor
 import com.example.groceryapp.ui.theme.whiteColor
 
 @Composable
-fun PasswordTextFieldL(
+fun PasswordTextFieldS(
     value: String,
     onValueChange: (String) -> Unit
 ) {

@@ -25,7 +25,6 @@ import com.example.groceryapp.ui.theme.primaryDarkColor
 import com.example.groceryapp.ui.theme.whiteColor
 
 @Composable
-@Preview
 fun CreateButton (
     onClick: () -> Unit = {},
 ) {
