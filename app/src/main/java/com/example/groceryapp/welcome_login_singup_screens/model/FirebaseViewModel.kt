@@ -1,10 +1,9 @@
 package com.example.groceryapp.welcome_login_singup_screens.model
 
+import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.util.Base64
-import android.widget.Toast
-import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.ViewModel
 import com.example.groceryapp.welcome_login_singup_screens.data.UserProfile
 import com.google.firebase.auth.FirebaseAuth
@@ -12,7 +11,6 @@ import com.google.firebase.firestore.FirebaseFirestore
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
 import javax.inject.Inject
 
@@ -174,6 +172,22 @@ class FirebaseViewModel @Inject constructor(
 
     }
     // Сохранение аватарки (Bitmap -> Base64 -> Firestore)
+
+
+    fun uploadAvatar(resId: Int, context: Context) {
+        try {
+            // Конвертируем Int ID в объект Bitmap
+            val bitmap = BitmapFactory.decodeResource(context.resources, resId)
+            if (bitmap != null) {
+                uploadAvatar(bitmap) // Вызываем вашу исходную функцию
+            } else {
+                _userState.value = UiState.Error("Не удалось загрузить встроенную картинку")
+            }
+        } catch (e: Exception) {
+            _userState.value = UiState.Error("Ошибка обработки ресурса: ${e.localizedMessage}")
+        }
+    }
+
 
     fun uploadAvatar(bitmap: Bitmap) {
         val uid = auth.currentUser?.uid
