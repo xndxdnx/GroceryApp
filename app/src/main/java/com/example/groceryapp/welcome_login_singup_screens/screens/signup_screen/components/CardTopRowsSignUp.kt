@@ -1,4 +1,4 @@
-package com.example.groceryapp.welcome_login_singup_screens.screens.create_account_screen.components
+package com.example.groceryapp.welcome_login_singup_screens.screens.signup_screen.components
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text

@@ -1,4 +1,4 @@
-package com.example.groceryapp.welcome_login_singup_screens.screens.create_account_screen.components
+package com.example.groceryapp.welcome_login_singup_screens.screens.signup_screen.components
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -10,7 +10,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.groceryapp.ui.theme.blackColor

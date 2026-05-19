@@ -1,5 +1,7 @@
 package com.example.groceryapp.welcome_login_singup_screens.screens.welcome_screen
 
+import android.widget.Toast
+import android.widget.Toast.makeText
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -29,6 +31,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ModifierLocalBeyondBoundsLayout
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -49,13 +52,14 @@ import com.example.groceryapp.welcome_login_singup_screens.screens.welcome_scree
 import com.example.groceryapp.welcome_login_singup_screens.screens.welcome_screen.components.TopElementsWelcome
 
 @Composable
-@Preview
 fun WelcomeScreen(
     continueWithGoogleClick: () -> Unit = {},
     createAccountClick: () -> Unit = {},
     loginClick: () -> Unit = {},
     backClick: () -> Unit = {},
 ) {
+    val context = LocalContext.current
+
     Box(
         modifier = Modifier
             .fillMaxSize(),
@@ -80,7 +84,10 @@ fun WelcomeScreen(
             ) {
                 CardTopRows()
                 Spacer(modifier = Modifier.height(20.dp))
-                GoogleButton(onClick = continueWithGoogleClick)
+                GoogleButton(onClick = {
+                    Toast.makeText(context, "Пока-что не реализованно😢😢😢", Toast.LENGTH_SHORT).show()
+                }
+                )
                 Spacer(modifier = Modifier.height(10.dp))
                 CreateButton(onClick = createAccountClick)
                 Spacer(modifier = Modifier.height(15.dp))
