@@ -49,7 +49,6 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @Composable
-@Preview
 fun ThirdSplashScreen(
     viewModel: SplashScreensViewModel = hiltViewModel(),
     onButtonClick: () -> Unit = {},

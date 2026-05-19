@@ -22,6 +22,12 @@ navigationCompose = "2.8.5" # Подходящая версия
 kotlinSerialization = "2.0.21" # Проверьте, чтобы это имя СТРОГО совпадало с тем, что ниже
 kotlinxSerializationJson = "1.7.3" # Сама библиотека сериализации
 
+# BoM Firebase
+bomVersion = "33.0.0"
+# Firebase Google service
+googleGmsGoogleServices = "4.4.4"
+
+
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -51,6 +57,11 @@ androidx-navigation-compose = { group = "androidx.navigation", name = "navigatio
     # Библиотека для работы с аннотацией @Serializable
 kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
 
+# Firebase
+firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "bomVersion" }
+firebase-database = { group = "com.google.firebase", name = "firebase-database"} # Без версии!
+firebase-auth = { group = "com.google.firebase", name = "firebase-auth" } # Без версии!
+firebase-firestore = { group = "com.google.firebase", name = "firebase-firestore" } # Без версии!
 
 
 [plugins]
@@ -65,4 +76,7 @@ ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 #Serialization
     # Плагин сериализации
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlinSerialization" }
+
+# Объявляем плагин Google Services для Firebase
+google-gms-google-services = { id = "com.google.gms.google-services", version.ref = "googleGmsGoogleServices" }
 

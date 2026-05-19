@@ -6,4 +6,6 @@ plugins {
     //Подключаем Hilt и KSP
     alias(libs.plugins.hilt) apply false
     alias(libs.plugins.ksp) apply false
+    // Firebase Google service
+    alias(libs.plugins.google.gms.google.services) apply false
 }

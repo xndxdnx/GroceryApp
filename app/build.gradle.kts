@@ -9,6 +9,8 @@ plugins {
 
     // Serialization
     alias(libs.plugins.kotlin.serialization)
+    // Firebase Google service
+    alias(libs.plugins.google.gms.google.services)
 }
 
 android {
@@ -52,6 +54,7 @@ dependencies {
     // Dagger Hilt
     implementation(libs.hilt.android)
     implementation(libs.hilt.navigation.compose)
+    implementation(libs.firebase.database)
     ksp(libs.hilt.compiler)
 
     // Serialization
@@ -59,6 +62,13 @@ dependencies {
     implementation(libs.androidx.navigation.compose) // Берется из [libraries] -> androidx-navigation-compose
         // Библиотека для поддержки @Serializable (без неё код не скомпилируется!)
     implementation(libs.kotlinx.serialization.json)
+
+        // BoM и другие Firebase
+    // Добавляем библиотеки BoM через Version Catalog
+    implementation(platform(libs.firebase.bom)) // <-- Сам Bom
+    implementation(libs.firebase.firestore)     // <-- другие FireBase модули просто указываем здесь и всё остальное
+    implementation(libs.firebase.database)     // <-- другие FireBase модули просто указываем здесь и всё остальное
+    implementation(libs.firebase.auth)          //  BoM скачает и подключит самостоятельно
 
 
 
