@@ -1,6 +1,5 @@
 package com.example.groceryapp.welcome_login_singup_screens.screens.login_screen.components
 
-import android.graphics.Color
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -21,7 +20,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.groceryapp.ui.theme.backgroundColor1
-import com.example.groceryapp.ui.theme.blackColor
 import com.example.groceryapp.ui.theme.greyColor
 import com.example.groceryapp.ui.theme.linkColor
 import com.example.groceryapp.ui.theme.primaryDarkColor
@@ -31,9 +29,9 @@ import com.example.groceryapp.ui.theme.whiteColor
 @Composable
 fun RememberRow (
     onSwitch:() -> Unit = {},
-    onClick:() -> Unit = {},
+    onForgotClick:() -> Unit = {},
 
-){
+    ){
     var isChecked by remember { mutableStateOf(false) }
     Row(
         modifier = Modifier
@@ -75,7 +73,7 @@ fun RememberRow (
             modifier = Modifier
                 .padding(end = 10.dp)
                 .clickable{
-                    onClick()
+                    onForgotClick()
                 }
         )
 

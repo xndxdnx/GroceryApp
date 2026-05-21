@@ -110,7 +110,9 @@ fun LoginScreen(
                     )
                 }
                 item { Spacer(modifier = Modifier.height(8.dp)) }
-                item { RememberRow() }
+                item { RememberRow(onForgotClick = {
+                    viewModel.uploadAvatar(R.drawable.login_picture, context = context)
+                }) }
                 item { Spacer(modifier = Modifier.height(8.dp)) }
                 item { LoginButtonL(
                     onClick = {
