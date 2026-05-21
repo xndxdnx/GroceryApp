@@ -2,10 +2,15 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
-    //DaggerHilt
-    id("com.google.dagger.hilt.android")
-    id("kotlin-kapt")
 
+    // DaggerHilt
+    alias(libs.plugins.hilt)
+    alias(libs.plugins.ksp)
+
+    // Serialization
+    alias(libs.plugins.kotlin.serialization)
+    // Firebase Google service
+    alias(libs.plugins.google.gms.google.services)
 }
 
 android {
@@ -46,11 +51,26 @@ android {
 }
 
 dependencies {
-    //DaggerHilt
-    implementation("com.google.dagger:hilt-android:2.55")
-    kapt("com.google.dagger:hilt-android-compiler:2.55")
-    implementation("androidx.hilt:hilt-navigation-compose:1.1.0")
-    implementation(libs.androidx.compose.remote.creation.core)
+    // Dagger Hilt
+    implementation(libs.hilt.android)
+    implementation(libs.hilt.navigation.compose)
+    implementation(libs.firebase.database)
+    ksp(libs.hilt.compiler)
+
+    // Serialization
+        // Навигация
+    implementation(libs.androidx.navigation.compose) // Берется из [libraries] -> androidx-navigation-compose
+        // Библиотека для поддержки @Serializable (без неё код не скомпилируется!)
+    implementation(libs.kotlinx.serialization.json)
+
+        // BoM и другие Firebase
+    // Добавляем библиотеки BoM через Version Catalog
+    implementation(platform(libs.firebase.bom)) // <-- Сам Bom
+    implementation(libs.firebase.firestore)     // <-- другие FireBase модули просто указываем здесь и всё остальное
+    implementation(libs.firebase.database)     // <-- другие FireBase модули просто указываем здесь и всё остальное
+    implementation(libs.firebase.auth)          //  BoM скачает и подключит самостоятельно
+
+
 
     implementation(libs.androidx.material3)
     implementation(libs.androidx.core.ktx)

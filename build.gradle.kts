@@ -3,6 +3,9 @@ plugins {
     alias(libs.plugins.android.application) apply false
     alias(libs.plugins.kotlin.android) apply false
     alias(libs.plugins.kotlin.compose) apply false
-    //DaggerHilt
-    id("com.google.dagger.hilt.android") version "2.55" apply false
+    //Подключаем Hilt и KSP
+    alias(libs.plugins.hilt) apply false
+    alias(libs.plugins.ksp) apply false
+    // Firebase Google service
+    alias(libs.plugins.google.gms.google.services) apply false
 }

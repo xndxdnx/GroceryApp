@@ -9,7 +9,24 @@ lifecycleRuntimeKtx = "2.10.0"
 activityCompose = "1.13.0"
 composeBom = "2024.09.00"
 material3 = "1.4.0"
-remoteCreationCore = "1.0.0-alpha07"
+
+# DaggerHilt
+hilt = "2.55"    # <-- Вот эта версия DaggerHilt
+hiltNavigation = "1.1.0" # <-- Зависимость для DaggerHilt
+ksp = "2.0.21-1.0.25" # <-- Версия KSP должна соответствовать версии Kotlin
+
+#Serialization
+# Библиотека навигации
+navigationCompose = "2.8.5" # Подходящая версия
+# Плагин сериализации (использует основную версию kotlin)
+kotlinSerialization = "2.0.21" # Проверьте, чтобы это имя СТРОГО совпадало с тем, что ниже
+kotlinxSerializationJson = "1.7.3" # Сама библиотека сериализации
+
+# BoM Firebase
+bomVersion = "33.0.0"
+# Firebase Google service
+googleGmsGoogleServices = "4.4.4"
+
 
 
 [libraries]
@@ -29,11 +46,37 @@ androidx-compose-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-te
 androidx-compose-material3 = { group = "androidx.compose.material3", name = "material3" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3", version.ref = "material3" }
 
-androidx-compose-remote-creation-core = { group = "androidx.compose.remote", name = "remote-creation-core", version.ref = "remoteCreationCore" }
+# DaggerHilt
+hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
+hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hilt" }
+hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hiltNavigation" }
+
+#Serialization
+    # Библиотека навигации
+androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigationCompose" }
+    # Библиотека для работы с аннотацией @Serializable
+kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
+
+# Firebase
+firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "bomVersion" }
+firebase-database = { group = "com.google.firebase", name = "firebase-database"} # Без версии!
+firebase-auth = { group = "com.google.firebase", name = "firebase-auth" } # Без версии!
+firebase-firestore = { group = "com.google.firebase", name = "firebase-firestore" } # Без версии!
 
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+
+# DaggerHilt
+hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+
+#Serialization
+    # Плагин сериализации
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlinSerialization" }
+
+# Объявляем плагин Google Services для Firebase
+google-gms-google-services = { id = "com.google.gms.google-services", version.ref = "googleGmsGoogleServices" }
 
