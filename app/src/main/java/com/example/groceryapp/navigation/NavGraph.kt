@@ -6,7 +6,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
-import com.example.groceryapp.main.data.MainHost
 import com.example.groceryapp.preview_splash_screens.screens.FirstSplashScreen
 import com.example.groceryapp.preview_splash_screens.screens.SecondSplashScreen
 import com.example.groceryapp.preview_splash_screens.screens.ThirdSplashScreen
@@ -139,7 +138,6 @@ fun NavGraph() {
                     }
                 )
             }
-
         }
         composable<MainScreenRoute> {
             MainHost() // Вызываем экран с его внутренним Scaffold и навигатором
