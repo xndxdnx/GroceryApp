@@ -139,6 +139,7 @@ fun NavGraph() {
                 )
             }
         }
+
         composable<MainScreenRoute> {
             MainHost() // Вызываем экран с его внутренним Scaffold и навигатором
         }

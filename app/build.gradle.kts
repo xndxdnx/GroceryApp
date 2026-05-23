@@ -5,6 +5,7 @@ plugins {
 
     // DaggerHilt
     alias(libs.plugins.hilt)
+    //KSP
     alias(libs.plugins.ksp)
 
     // Serialization
@@ -51,6 +52,14 @@ android {
 }
 
 dependencies {
+    // KSP для Room & Room
+    // Добавляем библиотеки Room через Version Catalog
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.ktx)
+    // Передаем компилятор Room в обработчик KSP
+    ksp(libs.androidx.room.compiler)
+
+
     // Dagger Hilt
     implementation(libs.hilt.android)
     implementation(libs.hilt.navigation.compose)

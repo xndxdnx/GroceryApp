@@ -1,9 +1,11 @@
 package com.example.groceryapp.DI
 
+import com.example.groceryapp.favorites.repository.FavoritesRepositoryImpl
 import com.example.groceryapp.repository.GoodRepository
 import com.example.groceryapp.repository.GoodRepositoryImpl
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
