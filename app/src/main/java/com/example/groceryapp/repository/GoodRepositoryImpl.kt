@@ -75,7 +75,7 @@ class GoodRepositoryImpl @Inject constructor() : GoodRepository {
                 title = "Pome Granate",
                 price = 2.09,
                 description = "",
-                imageResId = R.drawable.black_grapes_png,
+                imageResId = R.drawable.pome_granate_png,
                 weightTitle = "1.5 lbs",
                 accentColor = Color(0xFFFFE3E2)
             ),

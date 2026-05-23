@@ -50,11 +50,8 @@ fun LoginScreen(
 ) {
 
     val context = LocalContext.current
-
     val email by viewModel.emailInput.collectAsStateWithLifecycle()
-    val phone by viewModel.phoneInput.collectAsStateWithLifecycle()
     val password by viewModel.passwordInput.collectAsStateWithLifecycle()
-
     val userState by viewModel.userState.collectAsStateWithLifecycle()
 
     LaunchedEffect(userState) {
@@ -124,8 +121,6 @@ fun LoginScreen(
                 ) }
                 item { Spacer(modifier = Modifier.height(15.dp)) }
                 item { BottomRowL(onClick = signUpClick) }
-
-
             }
         }
         if (userState is UiState.Loading) {

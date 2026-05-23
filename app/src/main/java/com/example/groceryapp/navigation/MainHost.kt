@@ -48,7 +48,7 @@ sealed class BottomBarItem<T : Any>(
     val iconRes: Int
 ) {
     object Catalog : BottomBarItem<HomeRoute>(HomeRoute, R.drawable.catalog_ic       )
-    object Cart : BottomBarItem<CartRoute>(CartRoute, R.drawable.cart_icon)
+    object Cart : BottomBarItem<CartRoute>(CartRoute, R.drawable.cart_icon2)
     object Profile : BottomBarItem<ProfileRoute>(ProfileRoute, R.drawable.create_an_account_logo)
     object Favorite : BottomBarItem<FavoriteRoute>(FavoriteRoute, R.drawable.favorite_icon)
 }

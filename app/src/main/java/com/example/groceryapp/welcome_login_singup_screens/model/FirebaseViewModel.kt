@@ -5,12 +5,16 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.util.Base64
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.groceryapp.favorites.repository.FavoritesRepository
+import com.example.groceryapp.repository.GoodRepository
 import com.example.groceryapp.welcome_login_singup_screens.data.UserProfile
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
 import java.io.ByteArrayOutputStream
 import javax.inject.Inject
 
@@ -26,34 +30,25 @@ sealed class UiState<out T> {
 @HiltViewModel
 class FirebaseViewModel @Inject constructor(
     private val auth: FirebaseAuth,
-    private val db: FirebaseFirestore
+    private val db: FirebaseFirestore,
+    private val favRepository: FavoritesRepository
 ) : ViewModel() {
-
     // Переменные для хранения ввода пользователя
     val emailInput = MutableStateFlow("")
     val phoneInput = MutableStateFlow("")
     val passwordInput = MutableStateFlow("")
-
     // Функции для обновления текста из Compose экрана
-    fun onEmailChange(newValue: String) {
-        emailInput.value = newValue
-    }
+    fun onEmailChange(newValue: String) { emailInput.value = newValue }
 
-    fun onPhoneChange(newValue: String) {
-        phoneInput.value = newValue
-    }
+    fun onPhoneChange(newValue: String) { phoneInput.value = newValue }
 
-    fun onPasswordChange(newValue: String) {
-        passwordInput.value = newValue
-    }
-
+    fun onPasswordChange(newValue: String) { passwordInput.value = newValue }
 
     private val _userState = MutableStateFlow<UiState<UserProfile>>(UiState.Idle)
-    val userState: StateFlow<UiState<UserProfile>> = _userState
 
+    val userState: StateFlow<UiState<UserProfile>> = _userState
 ///////////////////////////////////////////////////////////////////////////////////////////
     // Вход в аккаунт
-
     fun signInUser(email: String, password: String) {
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener { signIn ->
@@ -67,34 +62,33 @@ class FirebaseViewModel @Inject constructor(
                 }
             }
     }
-
 ///////////////////////////////////////////////////////////////////////////////////////////
-
     // Выход из аккаунта
     fun signOut(
         onSuccess: () -> Unit = {}
     ) {
-        auth.signOut()
-        onSuccess
+        viewModelScope.launch {
+            val currentUid = auth.currentUser?.uid
+            if (currentUid != null) {
+                favRepository.clearFavorites(currentUid)
+            }
+            auth.signOut()
+            onSuccess()
+        }
     }
-
 ///////////////////////////////////////////////////////////////////////////////////////////
-
     // Регистрация пользователя (Auth + создание документа в Firestore)
     fun registerUser(email: String, password: String, phone: String) {
-
         if (email.isEmpty() || password.isEmpty() || phone.isEmpty()) {
             _userState.value = UiState.Error("Заполните все поля")
             return
         }
-
 // 1. Проверка формата Email
         val emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
         if (!email.matches(emailPattern.toRegex())) {
             _userState.value = UiState.Error("Введите корректный Email")
             return
         }
-
 // 2. Проверка длины и сложности пароля
         if (password.length < 6) {
             _userState.value = UiState.Error("Пароль должен быть не менее 6 символов")

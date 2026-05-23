@@ -41,70 +41,68 @@ fun SearchField(
     value: String = "",
     onValueChange: (String) -> Unit = {}
 ) {
+        TextField(
+            modifier = Modifier
+                .height(55.dp)
+                .fillMaxWidth(),
+            value = value,
+            onValueChange = onValueChange,
+            textStyle = TextStyle(
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = blackColor,
+                textMotion = TextMotion.Animated
+            ),
 
-    TextField(
-        modifier = Modifier
-            .height(55.dp)
-            .fillMaxWidth(),
-        value = value,
-        onValueChange = onValueChange,
-        textStyle = TextStyle(
-            fontSize = 20.sp,
-            fontWeight = FontWeight.Bold,
-            color = blackColor,
-            textMotion = TextMotion.Animated
-        ),
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
 
-        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
-
-        // Иконка  слева
-        leadingIcon = {
-            Icon(
-                painter = painterResource(R.drawable.find_icon),
-                contentDescription = null,
-                tint = greyColor,
-                modifier = Modifier
-                    .padding(start = 15.dp) // перенесли отступ из плейсхолдера
-                    .size(20.dp)
-            )
-        },
-
-        // Интерактивная справа
-        trailingIcon = {
-            IconButton(
-                onClick = { },
-                modifier = Modifier.padding(end = 15.dp)
-            ) {
+            // Иконка  слева
+            leadingIcon = {
                 Icon(
-                    painter = painterResource(R.drawable.filters_icon),
+                    painter = painterResource(R.drawable.find_icon),
                     contentDescription = null,
                     tint = greyColor,
                     modifier = Modifier
-                    .size(20.dp)
+                        .padding(start = 15.dp) // перенесли отступ из плейсхолдера
+                        .size(20.dp)
                 )
-            }
-        },
+            },
 
-        // Плейсхолдер теперь содержит только подсказку
-        placeholder = {
-            Text(
-                text = "Search keywords..", // Лучше написать текст, так как точки уже будут при вводе
-                color = greyColor,
-                fontSize = 15.sp,
-                modifier = Modifier.padding(start = 10.dp)
-            )
-        },
-        shape = RoundedCornerShape(5.dp),
-        colors = TextFieldDefaults.colors(
-            focusedContainerColor = whiteColor,
-            unfocusedContainerColor = whiteColor,
-            disabledContainerColor = Color.Transparent,
-            focusedIndicatorColor = Color.Transparent,
-            unfocusedIndicatorColor = Color.Transparent,
-            cursorColor = Color.Black,
-            focusedTextColor = blackColor,
-            unfocusedTextColor = blackColor
-        ),
-        singleLine = true,
-    )
-}
+            // Интерактивная справа
+            trailingIcon = {
+                IconButton(
+                    onClick = { },
+                    modifier = Modifier.padding(end = 15.dp)
+                ) {
+                    Icon(
+                        painter = painterResource(R.drawable.filters_icon),
+                        contentDescription = null,
+                        tint = greyColor,
+                        modifier = Modifier
+                            .size(20.dp)
+                    )
+                }
+            },
+
+            placeholder = {
+                Text(
+                    text = "Search keywords..",
+                    color = greyColor,
+                    fontSize = 15.sp,
+                    modifier = Modifier.padding(start = 10.dp)
+                )
+            },
+            shape = RoundedCornerShape(5.dp),
+            colors = TextFieldDefaults.colors(
+                focusedContainerColor = whiteColor,
+                unfocusedContainerColor = whiteColor,
+                disabledContainerColor = Color.Transparent,
+                focusedIndicatorColor = Color.Transparent,
+                unfocusedIndicatorColor = Color.Transparent,
+                cursorColor = Color.Black,
+                focusedTextColor = blackColor,
+                unfocusedTextColor = blackColor
+            ),
+            singleLine = true,
+        )
+    }
