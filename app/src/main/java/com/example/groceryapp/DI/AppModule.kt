@@ -1,5 +1,6 @@
 package com.example.groceryapp.DI
 
+import com.example.groceryapp.data.MarketingDao
 import com.example.groceryapp.favorites.repository.FavoritesRepositoryImpl
 import com.example.groceryapp.repository.GoodRepository
 import com.example.groceryapp.repository.GoodRepositoryImpl
@@ -30,8 +31,8 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun  provideGoodRepository() : GoodRepository {
-        return GoodRepositoryImpl()
+    fun  provideGoodRepository(marketingDao: MarketingDao) : GoodRepository {
+        return GoodRepositoryImpl(marketingDao)
     }
 
 

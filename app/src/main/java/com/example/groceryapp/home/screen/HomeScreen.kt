@@ -26,7 +26,6 @@ import com.example.groceryapp.welcome_login_singup_screens.screens.signup_screen
 fun HomeScreen(
     viewModel: HomeViewModel = hiltViewModel()
 ) {
-
     val goodsState by viewModel.uiState.collectAsStateWithLifecycle()
 
     Column(

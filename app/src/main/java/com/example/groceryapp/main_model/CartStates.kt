@@ -1,4 +1,4 @@
-package com.example.groceryapp.model
+package com.example.groceryapp.main_model
 
 import com.example.groceryapp.cart.model.CartUiItem
 

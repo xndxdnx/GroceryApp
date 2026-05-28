@@ -3,7 +3,7 @@ package com.example.groceryapp.cart.model
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.groceryapp.cart.repository.CartRepository
-import com.example.groceryapp.model.CartStates
+import com.example.groceryapp.main_model.CartStates
 import com.example.groceryapp.repository.GoodRepository
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.lifecycle.HiltViewModel

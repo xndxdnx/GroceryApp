@@ -5,6 +5,7 @@ import android.content.Context
 import androidx.room.Room
 import com.example.groceryapp.cart.data.CartDao
 import com.example.groceryapp.data.AppDatabase
+import com.example.groceryapp.data.MarketingDao
 import com.example.groceryapp.favorites.data.FavoritesDao
 import dagger.Module
 import dagger.Provides
@@ -35,5 +36,12 @@ object DatabaseModule {
     fun providesCartDao(database: AppDatabase): CartDao {
         return database.getCartDao()
     }
+
+    @Provides
+    fun providesMarketingDao(database: AppDatabase): MarketingDao {
+        return database.getMarketingDao()
+    }
+
+
 
 }

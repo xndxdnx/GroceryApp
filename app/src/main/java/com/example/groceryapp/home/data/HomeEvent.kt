@@ -1,6 +1,6 @@
 package com.example.groceryapp.home.data
 
-import com.example.groceryapp.model.Category
+import com.example.groceryapp.main_model.Category
 
 interface HomeEvent {
     data class ChangeCategory (val category: Category) : HomeEvent

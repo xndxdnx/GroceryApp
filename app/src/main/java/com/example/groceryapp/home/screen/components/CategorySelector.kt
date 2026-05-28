@@ -26,7 +26,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.groceryapp.model.Category
+import com.example.groceryapp.main_model.Category
 import com.example.groceryapp.ui.theme.greyColor
 
 @Composable

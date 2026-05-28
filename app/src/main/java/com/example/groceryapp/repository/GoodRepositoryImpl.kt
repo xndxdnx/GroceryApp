@@ -3,14 +3,25 @@ package com.example.groceryapp.repository
 
 import androidx.compose.ui.graphics.Color
 import com.example.groceryapp.R
-import com.example.groceryapp.model.Category
-import com.example.groceryapp.model.Good
+import com.example.groceryapp.data.DiscountEntity
+import com.example.groceryapp.data.MarketingDao
+import com.example.groceryapp.data.NewProductEntity
+import com.example.groceryapp.main_model.Category
+import com.example.groceryapp.main_model.Good
+import com.google.firebase.Firebase
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.firestore
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 import kotlin.collections.find
 import kotlin.collections.flatten
 
 
-class GoodRepositoryImpl @Inject constructor() : GoodRepository {
+class GoodRepositoryImpl @Inject constructor(
+    private val marketingDao: MarketingDao
+) : GoodRepository {
 
     private val goods = mapOf(
         Category.VEGETABLES to listOf(
@@ -94,6 +105,62 @@ class GoodRepositoryImpl @Inject constructor() : GoodRepository {
     override fun getGoodsByCategory(category: Category): List<Good> {
        return goods[category] ?: emptyList()
     }
+
+
+    override fun getAllNewGoods(): Flow<List<Int>> {
+        return marketingDao.getNewPoints().map { list ->
+            list.map { item ->
+                item.productId
+
+            }
+        }
+    }
+
+    override fun getDiscountsOfGoods():  Flow<Map<Int, Int>> {
+        return marketingDao.getDiscounts().map { list ->
+            list.associate { item ->
+                item.productId to item.discountValue
+
+            }
+        }
+    }
+
+    override suspend fun syncMarketingData() {
+
+        val firestore = FirebaseFirestore.getInstance()
+
+        val discountsRef = firestore.collection("discounts")
+        try {
+            val snapshot = discountsRef.get().await()
+            val discountEntities = snapshot.documents.map { document ->
+                DiscountEntity(
+                    productId = document.id.toInt(),
+                    discountValue = document.getLong("discountValue")?.toInt() ?: 0
+                )
+            }
+            marketingDao.insertDiscounts(discountEntities)
+
+            val newProductSnapshot = firestore.collection("new_products").get().await()
+
+            val newProductEntities = newProductSnapshot.documents.map{ document ->
+                NewProductEntity(
+                    productId = document.id.toInt()
+                )
+            }
+            marketingDao.insertNewProducts(newProductEntities)
+
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
+
+
+
+    }
+
+
+
+
 
 
 }

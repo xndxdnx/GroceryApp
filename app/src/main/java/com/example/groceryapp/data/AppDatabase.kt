@@ -10,15 +10,19 @@ import com.example.groceryapp.favorites.data.FavoritesDao
 @Database(
     entities = [
         FavoriteProductEntity::class,
-        CartProductEntity::class
+        CartProductEntity::class,
+        DiscountEntity::class,
+        NewProductEntity::class
 
                ],
-    version = 2
+    version = 3
 )
 abstract class AppDatabase : RoomDatabase(){
 
     abstract fun getFavoritesDao(): FavoritesDao
 
     abstract fun getCartDao(): CartDao
+
+    abstract fun getMarketingDao(): MarketingDao
 
 }
