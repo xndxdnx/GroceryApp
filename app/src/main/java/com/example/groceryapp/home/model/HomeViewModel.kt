@@ -5,11 +5,12 @@ import androidx.lifecycle.viewModelScope
 import com.example.groceryapp.cart.repository.CartRepository
 import com.example.groceryapp.favorites.repository.FavoritesRepository
 import com.example.groceryapp.home.data.HomeEvent
-import com.example.groceryapp.model.Category
-import com.example.groceryapp.model.GoodStates
+import com.example.groceryapp.main_model.Category
+import com.example.groceryapp.main_model.GoodStates
 import com.example.groceryapp.repository.GoodRepository
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -71,6 +72,27 @@ class HomeViewModel @Inject constructor(
                     currentState.copy(cartProductsCount = cartMap)
                 }
             }
+        }
+
+        viewModelScope.launch {
+            repository.getAllNewGoods()
+                .collect { listOfIds ->
+                    _uiState.update { currentState ->
+                        currentState.copy(newProductIds = listOfIds)
+                    }
+                }
+        }
+        viewModelScope.launch {
+            repository.getDiscountsOfGoods()
+                .collect { discountsMap ->
+                    _uiState.update {currentState ->
+                        currentState.copy(discounts = discountsMap)
+                    }
+                }
+        }
+
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.syncMarketingData()
         }
     }
 

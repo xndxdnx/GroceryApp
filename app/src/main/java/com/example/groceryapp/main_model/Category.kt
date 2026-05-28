@@ -1,9 +1,7 @@
-package com.example.groceryapp.model
+package com.example.groceryapp.main_model
 
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
 import com.example.groceryapp.R
-import com.example.groceryapp.ui.theme.greyColor
 
 enum class Category (
     val displayName: String,
